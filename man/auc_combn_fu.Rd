@@ -7,15 +7,23 @@
 auc_combn_fu(DATA, DV, IV, COMBN_VAL, ALGORITHM = "+")
 }
 \arguments{
-\item{DATA, }{DV, IV, COMBN_VAL, ALGORITHM}
+\item{DATA:}{put data frame}
+
+\item{DV:}{put Dependent Variable like this way: c("\emph{DV}")}
+
+\item{IV:}{put Independent Variable like this way: c("\emph{IV1}", "\emph{IV2}", ...)}
+
+\item{COMBN_VAL:}{consider how many combinations you want: 1, 2, 3, ...}
+
+\item{ALGORITHM:}{you can choose "+" for multiplicity or "*" for interactions}
 }
 \description{
 This function fu auc from combinations
 }
 \examples{
-auc_combn_fu(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),5) \%>\% View()
-auc_combn_fu(mtcars,c("vs"),c("mpg","cyl","disp","drat"),4) \%>\% View()
-auc_combn_fu(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat","wt","qsec","am","gear","carb"),3) \%>\% View()
+auc_combn_fu(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),5)
+auc_combn_fu(mtcars,c("vs"),c("mpg","cyl","disp","drat"),4)
+auc_combn_fu(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat","wt","qsec","am","gear","carb"),3)
 }
 \keyword{AUC}
 \keyword{Combination}
