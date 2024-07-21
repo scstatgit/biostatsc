@@ -1,7 +1,11 @@
 #' auc_combn_fu Function
 #'
 #' This function fu auc from combinations
-#' @param DATA, DV, IV, COMBN_VAL, ALGORITHM
+#' @param DATA: put data frame
+#' @param DV: put Dependent Variable like this way: c("_DV_")
+#' @param IV: put Independent Variable like this way: c("_IV1_", "_IV2_", ...)
+#' @param COMBN_VAL: consider how many combinations you want: 1, 2, 3, ...
+#' @param ALGORITHM: you can choose "+" for multiplicity or "*" for interactions
 #' @keywords AUC Combination Follow-up
 #' @export
 #' @examples
@@ -81,7 +85,7 @@ auc_combn_fu <- function(DATA,DV,IV,COMBN_VAL,ALGORITHM="+"){
             mutate(ord=seq_along(n)) %>%
             select(ord, combn_val, ref, variable, n, auc, auc_ci, pval) %>%
             filter(strsplit_f(variable, ref)) %>%
-            filter(pval<0.5 & combn_val==combn_val_i+1)
+            filter(pval<0.05 & combn_val==combn_val_i+1)
         }
         if(combn_val_i>=2){
           pvals <- c()
@@ -93,7 +97,7 @@ auc_combn_fu <- function(DATA,DV,IV,COMBN_VAL,ALGORITHM="+"){
             mutate(ord=seq_along(n)) %>%
             select(ord, combn_val, ref, variable, n, auc, auc_ci, pval) %>%
             filter(strsplit_f(variable, ref)) %>%
-            filter(pval<0.5 & combn_val==combn_val_i+1)
+            filter(pval<0.05 & combn_val==combn_val_i+1)
         }
         sigs <- rbind(sigs,result)
       }
