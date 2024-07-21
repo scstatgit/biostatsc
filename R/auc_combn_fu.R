@@ -1,6 +1,6 @@
 #' auc_combn_fu Function
 #'
-#' This function fu auc from combinations
+#' This function can follows-up AUC from multiple combinations, where P-value < 0.05 for Delong's test.
 #' @param DATA: put data frame
 #' @param DV: put Dependent Variable like this way: c("_DV_")
 #' @param IV: put Independent Variable like this way: c("_IV1_", "_IV2_", ...)
