@@ -10,7 +10,7 @@ delong_test(x, y)
 \item{x, }{y : two auc from pROC objects}
 }
 \description{
-This function multiplies a and b
+This function delong test x and y
 }
 \examples{
 delong_test()
