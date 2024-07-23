@@ -3,7 +3,6 @@
 #' This function delong test x and y
 #' @param x, y : two auc from pROC objects
 #' @keywords delong_test
-#' @export
 #' @examples
 #' delong_test()
 #'

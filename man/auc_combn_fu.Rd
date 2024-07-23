@@ -18,7 +18,7 @@ auc_combn_fu(DATA, DV, IV, COMBN_VAL, ALGORITHM = "+")
 \item{ALGORITHM:}{you can choose "+" for multiplicity or "*" for interactions}
 }
 \description{
-This function fu auc from combinations
+This function can follows-up AUC from multiple combinations, where P-value < 0.05 for Delong's test.
 }
 \examples{
 auc_combn_fu(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),5)

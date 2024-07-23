@@ -2,4 +2,7 @@
 
 export(auc_combn_fu)
 export(delong_test)
+export(e)
+export(i)
+export(ie)
 export(strsplit_f)

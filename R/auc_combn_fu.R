@@ -7,7 +7,6 @@
 #' @param COMBN_VAL: consider how many combinations you want: 1, 2, 3, ...
 #' @param ALGORITHM: you can choose "+" for multiplicity or "*" for interactions
 #' @keywords AUC Combination Follow-up
-#' @export
 #' @examples
 #' auc_combn_fu(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),5)
 #' auc_combn_fu(mtcars,c("vs"),c("mpg","cyl","disp","drat"),4)
