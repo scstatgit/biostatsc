@@ -33,7 +33,7 @@ TAB1(
 \item{MARGIN:}{margin of percentage. 1 as row percent, and 2 as col percent}
 }
 \description{
-This function can follows-up AUC from multiple combinations, where P-value < 0.05 for Delong's test.
+This function create table1 in biostatistics
 }
 \examples{
 ddd <- mtcars
@@ -44,7 +44,6 @@ TAB1(ddd, STRATA = "cyl", OVERALL = TRUE)
 TAB1(ddd, STRATA = "cyl", OVERALL = TRUE, CATDIGITS = 0)
 TAB1(ddd, STRATA = "cyl", OVERALL = TRUE, CONDIGITS = 3, CATDIGITS = 0, FUNC = "median", TYPE = 1, MARGIN = 1)
 }
-\keyword{Automatically}
 \keyword{biostatistics}
 \keyword{create}
 \keyword{in}

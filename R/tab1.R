@@ -1,6 +1,6 @@
 #' table1 function
 #'
-#' This function can follows-up AUC from multiple combinations, where P-value < 0.05 for Delong's test.
+#' This function create table1 in biostatistics
 #' @param DATA: put data frame
 #' @param STRATA: put stratification varaible
 #' @param OVERALL: if you want overall statistics, set TRUE
@@ -9,7 +9,7 @@
 #' @param FUNC: "mean" or "median"
 #' @param TYPE: type of print FUNC
 #' @param MARGIN: margin of percentage. 1 as row percent, and 2 as col percent
-#' @keywords Automatically create table1 in biostatistics
+#' @keywords create table1 in biostatistics
 #' @examples
 #' ddd <- mtcars
 #' ddd <- preprocess(ddd)
