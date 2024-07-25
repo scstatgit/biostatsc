@@ -1,7 +1,7 @@
 #' @export
 var.levels <- function(DATA, var){
-  vv <- var
-  vv.nlevels <- plyr::count(DATA[[vv]])
-  res <- vv.nlevels$x
+  xt <- table(DATA[[var]]) %>% as.data.frame()
+  names(xt) <- c("x", "freq")
+  res <- xt$x
   return(res)
 }
