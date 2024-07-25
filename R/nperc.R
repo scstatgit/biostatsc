@@ -9,10 +9,10 @@ nperc <- function(DATA, var1, var2, digits = 0, type = 0){
     res <- sprintf(paste0("%.f (%.",digits,"f%%)"), xt, pt0*100)
   }
   if(type==1){
-    res <- sprintf(paste0("%.f (%.",digits,"f%%)"), xt, t(pt1)*100)
+    res <- sprintf(paste0("%.f (%.",digits,"f%%)"), t(xt), t(pt1)*100)
   }
   if(type==2){
-    res <- sprintf(paste0("%.f (%.",digits,"f%%)"), xt, t(pt2)*100)
+    res <- sprintf(paste0("%.f (%.",digits,"f%%)"), t(xt), t(pt2)*100)
   }
   return(res)
 }
