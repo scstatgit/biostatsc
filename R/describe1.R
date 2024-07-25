@@ -12,7 +12,7 @@ describe1 <- function(DATA,CONDIGITS=1,CATDIGITS=1,FUNC="mean",TYPE=1){
     }
     vals <- c(vals, val)
   }
-  mat <- matrix(vals, ncol=1)
-  colnames(mat) <- "overall"
+  mat <- matrix(vals, ncol = 1)
+  colnames(mat) <- paste("Overall", paste0("(n=",formatC(nrow(DATA), format="f", big.mark=",", digits=0),")"), sep=" ")
   return(mat)
 }

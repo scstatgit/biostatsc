@@ -19,7 +19,7 @@
 #' TAB1(ddd, STRATA = "cyl", OVERALL = TRUE, CATDIGITS = 0)
 #' TAB1(ddd, STRATA = "cyl", OVERALL = TRUE, CONDIGITS = 3, CATDIGITS = 0, FUNC = "median", TYPE = 1, MARGIN = 1)
 #' @export
-TAB1 <- function(DATA, STRATA=NULL, OVERALL=FALSE, CONDIGITS=1,CATDIGITS=1,FUNC="mean",TYPE=1,MARGIN=2){
+TAB1 <- function(DATA, STRATA = NULL, OVERALL = FALSE, CONDIGITS = 1, CATDIGITS = 1, FUNC = "mean", TYPE = 1, MARGIN = 2){
   mat1 <- descirbe0(DATA, var.lvs)
   mat2 <- describe1(DATA)
   if(is.null(STRATA)){
@@ -32,6 +32,10 @@ TAB1 <- function(DATA, STRATA=NULL, OVERALL=FALSE, CONDIGITS=1,CATDIGITS=1,FUNC=
   if(!is.null(STRATA) & isTRUE(OVERALL)){
     mat3 <- describe2(DATA, STRATA = STRATA,CONDIGITS=CONDIGITS,CATDIGITS=CATDIGITS,FUNC=FUNC,TYPE=TYPE,MARGIN=MARGIN)
     res <- cbind(mat1,mat2,mat3)
+  }
+  if(!is.null(STRATA)){
+    www <- which(res[,1] == STRATA)
+    res <- res[-www,]
   }
   return(res)
 }

@@ -14,6 +14,7 @@ describe2 <- function(DATA,STRATA,CONDIGITS=1,CATDIGITS=1,FUNC="mean",TYPE=1,MAR
     vals <- c(vals, val)
   }
   mat <- matrix(vals, ncol=var.lvs[[STRATA]], byrow=T)
-  colnames(mat) <- as.character(var.levels(ddd,STRATA))
+  nn <- tapply(DATA, DATA[[STRATA]], function(x) paste0("(n=",formatC(nrow(x), format="f", big.mark=",", digits=0),")"))
+  colnames(mat) <- paste(var.levels(DATA, STRATA), nn, sep=" ")
   return(mat)
 }
