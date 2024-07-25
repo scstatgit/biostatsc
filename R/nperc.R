@@ -1,5 +1,5 @@
 #' @export
-nperc <- function(DATA, var1, var2, digits=0, type=0){
+nperc <- function(DATA, var1, var2, digits = 0, type = 0){
   DATA <- DATA
   xt <- table(DATA[[var1]], DATA[[var2]])
   pt0 <- prop.table(xt, margin=NULL)

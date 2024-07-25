@@ -1,5 +1,5 @@
 #' @export
-miqr <- function(var,digits=3,type=1){
+miqr <- function(var, digits = 3, type = 1){
   quant <- quantile(var, na.rm=TRUE)
   if(type==1){
     res <- sprintf(paste0("%.",digits,"f"," [%.",digits,"f, %.",digits,"f]"), quant[3], quant[2], quant[4])

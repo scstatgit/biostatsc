@@ -16,4 +16,3 @@ This function find formula from string
 strsplit_f()
 
 }
-\keyword{strsplit_f}

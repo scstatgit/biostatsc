@@ -2,7 +2,6 @@
 #'
 #' This function find formula from string
 #' @param string, find: find formula from string
-#' @keywords strsplit_f
 #' @examples
 #' strsplit_f()
 #'

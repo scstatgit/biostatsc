@@ -1,8 +1,4 @@
-#' delong_test() Function
-#'
-#' This function delong test x and y
-#' @param x, y : two auc from pROC objects
-#' @keywords delong_test
+#' @param x, y: two auc from pROC objects
 #' @examples
 #' delong_test()
 #'

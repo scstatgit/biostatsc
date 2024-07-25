@@ -1,17 +1,3 @@
-#' nested_if_else() Function
-#'
-#' source: https://www.r-bloggers.com/a-wrapper-around-nested-ifelse/
-#' This function find formula from string
-#' @param if_stat, then
-#' @keywords nested_if_else
-#' @examples
-#' ie(
-#'   i(DATA$EDUC %in% c(1,2), 1),
-#'   i(DATA$EDUC==3, 2),
-#'   i(DATA$EDUC==4, 3),
-#'   e(888)
-#' )
-#'
 #' @export
 i <- function(if_stat, then) {
   if_stat <- lazyeval::expr_text(if_stat)
@@ -23,6 +9,19 @@ e <- function(else_ret) {
   else_ret <- lazyeval::expr_text(else_ret)
   else_ret
 }
+#' nested_if_else() Function
+#'
+#' source: https://www.r-bloggers.com/a-wrapper-around-nested-ifelse/
+#' This function find formula from string
+#' @param if_stat, then
+#' @examples
+#' ie(
+#'   i(DATA$EDUC %in% c(1,2), 1),
+#'   i(DATA$EDUC==3, 2),
+#'   i(DATA$EDUC==4, 3),
+#'   e(888)
+#' )
+#' @keywords nested_if_else
 #' @export
 ie <- function(...) {
   args <- list(...)

@@ -12,7 +12,7 @@
 #' auc_combn_fu(mtcars,c("vs"),c("mpg","cyl","disp","drat"),4)
 #' auc_combn_fu(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat","wt","qsec","am","gear","carb"),3)
 #' @export
-auc_combn_fu <- function(DATA,DV,IV,COMBN_VAL,ALGORITHM="+"){
+auc_combn_fu <- function(DATA, DV, IV, COMBN_VAL, ALGORITHM = "+"){
   nm <- make.names(names(DATA), unique = T, allow_ = T)
   TMP <- subset(DATA, select = c(DV,IV))
   IVX <- paste0("X",1:length(IV))
