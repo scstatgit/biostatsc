@@ -20,7 +20,7 @@
 #' TAB1(ddd, STRATA = "cyl", OVERALL = TRUE, CONDIGITS = 3, CATDIGITS = 0, FUNC = "median", TYPE = 1, MARGIN = 1)
 #' @export
 TAB1 <- function(DATA, STRATA = NULL, OVERALL = FALSE, CONDIGITS = 1, CATDIGITS = 1, FUNC = "mean", TYPE = 1, MARGIN = 2){
-  mat1 <- descirbe0(DATA, var.lvs)
+  mat1 <- describe0(DATA, var.lvs)
   mat2 <- describe1(DATA)
   if(is.null(STRATA)){
     res <- cbind(mat1,mat2)
