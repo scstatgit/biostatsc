@@ -1,6 +1,3 @@
-#' @param var, digits, type
-#' @examples
-#' msd()
 #' @export
 msd <- function(var, digits = 3, type = 1){
   if(type==1){

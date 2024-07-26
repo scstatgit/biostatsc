@@ -2,6 +2,8 @@
 
 S3method(var,levels)
 S3method(var,nlevels)
+export(Freq)
+export(MostCommon)
 export(auc_combn_fu)
 export(autofac)
 export(delong_test)
