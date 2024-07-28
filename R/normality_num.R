@@ -1,4 +1,4 @@
-# Function to check normality for numerical variables
+#' @export
 normality.num <- function(DATA, VARIABLE) {
   nn <- length(VARIABLE)  # Added this line to define nn
   if (nn < 5000) {
