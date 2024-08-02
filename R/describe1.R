@@ -8,7 +8,7 @@ describe1 <- function(DATA, CONDIGITS = 1, CATDIGITS = 1, FUNC = "mean", TYPE = 
       if(FUNC=="median"){ val <- DATA[[var]] %>% var_miqr(digits = CONDIGITS, type = TYPE) }
     }
     if(var %in% var.fac){
-      val <- DATA[[var]] %>% nperc1(digits = CATDIGITS)
+      val <- DATA[[var]] %>% var_nperc1(digits = CATDIGITS)
     }
     vals <- c(vals, val)
   }

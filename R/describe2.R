@@ -8,7 +8,7 @@ describe2 <- function(DATA, STRATA, CONDIGITS = 1, CATDIGITS = 1, FUNC = "mean",
       if(FUNC=="median"){ val <- tapply(DATA[[var]], INDEX = DATA[[STRATA]], function(var) var_miqr(var, digits = CONDIGITS, type = TYPE)) }
     }
     if(var %in% var.fac){
-      vec <- nperc(DATA, var, STRATA, type = MARGIN, digits = CATDIGITS)
+      vec <- var_nperc(DATA, var, STRATA, type = MARGIN, digits = CATDIGITS)
       val <- matrix(vec, ncol=var.lvs[[STRATA]])
     }
     vals <- c(vals, val)
