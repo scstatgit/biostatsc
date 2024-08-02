@@ -8,9 +8,9 @@
 #' @param ALGORITHM: you can choose "+" for multiplicity or "*" for interactions
 #' @keywords AUC Combination Follow-up
 #' @examples
-#' auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),5)
-#' auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","drat"),4)
-#' auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat","wt","qsec","am","gear","carb"),3)
+#' auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),"mpg",1)
+#' auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),"mpg",2)
+#' auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),"mpg",3)
 #' @export
 auc_combn_listup <- function(DATA, DV, IV, VAR0, COMBN_VAL=1, ALGORITHM="+", EQUATION=FALSE, SEED=123){
   if(!isBinary(DATA[[DV]])) {
