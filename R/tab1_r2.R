@@ -19,8 +19,8 @@
 #' tab1_r3(ddl, "id", "day", "day.g")
 #' @export
 tab1_r2 <- function(DATA, ID, TIME, FUNC = "mean", CONDIGITS = 1, CATDIGITS = 1, TYPE = 1){
-  if(FUNC=="mean"){f_conti <- function(x) msd(var=x, digits = CONDIGITS, type = TYPE)}
-  if(FUNC=="median"){f_conti <- function(x) miqr(var=x, digits = CONDIGITS, type = TYPE)}
+  if(FUNC=="mean"){f_conti <- function(x) var_msd(var=x, digits = CONDIGITS, type = TYPE)}
+  if(FUNC=="median"){f_conti <- function(x) var_miqr(var=x, digits = CONDIGITS, type = TYPE)}
   res <- DATA %>%
     .[, !(colnames(.) %in% c(ID, TIME))] %>%
     tibble::add_column(n=factor("Overall"), .before=1) %>%

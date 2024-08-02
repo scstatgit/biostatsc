@@ -1,6 +1,6 @@
 # variables and levels
 #' @export
-tab1.describe0 <- function (DATA, LVS) {
+describe0 <- function (DATA, LVS) {
   lst <- list()
   row.lvs <- LVS
   row.lvs[which(!(names(row.lvs) %in% var.fac))] <- 1
