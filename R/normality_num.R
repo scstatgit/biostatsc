@@ -1,5 +1,5 @@
 #' @export
-normality.num <- function(DATA, VARIABLE) {
+normality_num <- function(DATA, VARIABLE) {
   nn <- length(VARIABLE)  # Added this line to define nn
   if (nn < 5000) {
     pval <- shapiro.test(DATA[[VARIABLE]])$p.value

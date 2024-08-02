@@ -1,7 +1,7 @@
 # variables and levels
-lst <- list()
 #' @export
-describe0 <- function (DATA, LVS) {
+tab1.describe0 <- function (DATA, LVS) {
+  lst <- list()
   row.lvs <- LVS
   row.lvs[which(!(names(row.lvs) %in% var.fac))] <- 1
   for (var in names(DATA)) {
@@ -9,7 +9,7 @@ describe0 <- function (DATA, LVS) {
       res <- ""
     }
     if (row.lvs[var] >= 2) {
-      res <- var.levels(DATA, var) %>% as.character()
+      res <- var_levels(DATA, var) %>% as.character()
     }
     idx <- which(names(row.lvs) == var)
     lst[[idx]] <- res
