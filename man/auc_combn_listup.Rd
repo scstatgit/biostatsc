@@ -30,9 +30,9 @@ auc_combn_listup(
 This function can list-up AUC from multiple combinations.
 }
 \examples{
-auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),5)
-auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","drat"),4)
-auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat","wt","qsec","am","gear","carb"),3)
+auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),"mpg",1)
+auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),"mpg",2)
+auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),"mpg",3)
 }
 \keyword{AUC}
 \keyword{Combination}
