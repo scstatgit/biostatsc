@@ -1,5 +1,5 @@
 #' @export
-MostCommon <- function(x) {
+mostCommon <- function(x) {
   ux <- unique(x)
   uxnotna <- ux[which(!is.na(ux))]
   if(length(uxnotna) > 0) {

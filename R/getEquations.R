@@ -1,3 +1,4 @@
+#' @export
 getEquations <- function(model, digits=3){
   coefs <- coef(model)
   coefs.f <- ifelse(coefs>=0,paste0("+", sprintf(paste0("%.",digits,"f"), coefs)), sprintf(paste0("%.",digits,"f"), coefs))

@@ -1,3 +1,4 @@
+#' @export
 isBinary <- function(x){
   if(is.integer(x)|is.numeric(x)){
     res <- all(x %in% c(0,1))

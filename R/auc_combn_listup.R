@@ -1,3 +1,17 @@
+#' auc_combn_listup Function
+#'
+#' This function can list-up AUC from multiple combinations.
+#' @param DATA: put data frame
+#' @param DV: put Dependent Variable like this way: c("_DV_")
+#' @param IV: put Independent Variable like this way: c("_IV1_", "_IV2_", ...)
+#' @param COMBN_VAL: consider how many combinations you want: 1, 2, 3, ...
+#' @param ALGORITHM: you can choose "+" for multiplicity or "*" for interactions
+#' @keywords AUC Combination Follow-up
+#' @examples
+#' auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),5)
+#' auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","drat"),4)
+#' auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat","wt","qsec","am","gear","carb"),3)
+#' @export
 auc_combn_listup <- function(DATA, DV, IV, VAR0, COMBN_VAL=1, ALGORITHM="+", EQUATION=FALSE, SEED=123){
   if(!isBinary(DATA[[DV]])) {
     warning("DV must be binary data")
