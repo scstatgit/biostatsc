@@ -1,6 +1,6 @@
 # Descriptive statistics by strata
 #' @export
-tab1.describe2 <- function(DATA, STRATA, CONDIGITS = 1, CATDIGITS = 1, FUNC = "mean", TYPE = 1, MARGIN = 2){
+describe2 <- function(DATA, STRATA, CONDIGITS = 1, CATDIGITS = 1, FUNC = "mean", TYPE = 1, MARGIN = 2){
   vals <- c()
   for(var in names(DATA)){
     if(var %in% var.num){

@@ -1,6 +1,6 @@
 # Descriptive statistics for overall
 #' @export
-tab1.describe1 <- function(DATA, CONDIGITS = 1, CATDIGITS = 1, FUNC = "mean", TYPE = 1){
+describe1 <- function(DATA, CONDIGITS = 1, CATDIGITS = 1, FUNC = "mean", TYPE = 1){
   vals <- c()
   for(var in names(DATA)){
     if(var %in% var.num){
