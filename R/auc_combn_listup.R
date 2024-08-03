@@ -4,15 +4,19 @@
 #' @param DATA: put data frame
 #' @param DV: put Dependent Variable like this way: c("_DV_")
 #' @param IV: put Independent Variable like this way: c("_IV1_", "_IV2_", ...)
+#' @param IV.REF: choose one of Reference Independent Varaible from IV
 #' @param COMBN_VAL: consider how many combinations you want: 1, 2, 3, ...
 #' @param ALGORITHM: you can choose "+" for multiplicity or "*" for interactions
+#' @param DISPLAY.NEVENT: If TRUE then print EVENT/N, default is FALSE.
+#' @param DISPLAY.EQUATION: If TRUE then print equation, default is FALSE.
+#' @param SEED: set.seed, default is 123. for calculating bootstrap CI.
 #' @keywords AUC Combination Follow-up
 #' @examples
-#' auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),"mpg",1)
-#' auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),"mpg",2)
-#' auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),"mpg",3)
+#' auc_combn_listup(mtcars,"vs",c("mpg","cyl","disp","hp","drat"),"mpg",1)
+#' auc_combn_listup(mtcars,"vs",c("mpg","cyl","disp","hp","drat"),"mpg",2)
+#' auc_combn_listup(mtcars,"vs",c("mpg","cyl","disp","hp","drat"),"mpg",3)
 #' @export
-auc_combn_listup <- function(DATA, DV, IV, VAR0, COMBN_VAL=1, ALGORITHM="+", EQUATION=FALSE, SEED=123){
+auc_combn_listup <- function(DATA, DV, IV, IV.REF, COMBN_VAL=1, ALGORITHM="+", DISPLAY.NEVENT=FALSE, DISPLAY.EQUATION=FALSE, SEED=123){
   if(!isBinary(DATA[[DV]])) {
     warning("DV must be binary data")
     break
@@ -28,7 +32,7 @@ auc_combn_listup <- function(DATA, DV, IV, VAR0, COMBN_VAL=1, ALGORITHM="+", EQU
   res <- c()
   for (var in vars){
     var.xx <- strsplit(var, split = paste0(" ",ALGORITHM," "), fixed = TRUE)[[1]]
-    tmpp0 <- subset(tmp, select=c(DV,VAR0)) %>% as.data.frame()
+    tmpp0 <- subset(tmp, select=c(DV,IV.REF)) %>% as.data.frame()
     tmpp0 <- na.omit(tmpp0)
     tmpp <- subset(tmp, select=c(DV,var.xx)) %>% as.data.frame()
     tmpp <- na.omit(tmpp)
@@ -37,18 +41,18 @@ auc_combn_listup <- function(DATA, DV, IV, VAR0, COMBN_VAL=1, ALGORITHM="+", EQU
     ff <- glm(mf, family = binomial, data = tmpp)
     tmpp["predictor"] <- predict(ff, type="respons")
 
-    ROC0 <- roc_(tmpp0, DV, VAR0)
-    ROC1 <- roc_(tmpp, DV, "predictor")
+    ROC0 <- roc_(tmpp0, DV, IV.REF) %>% suppressMessages()
+    ROC1 <- roc_(tmpp, DV, "predictor") %>% suppressMessages()
     direction <- ROC1$direction
     coff <- OptimalCutpoints::optimal.cutpoints("predictor", DV, tag.healthy = tag.healthy, methods = "Youden", data = tmpp, direction=direction)$Youden$Global$optimal.cutoff$cutoff[1]
     if(auc(ROC1)<0.5){
-      direction <- ifelse(ROC1$direction=="<",">","<")
-      ROC1 <- roc(tmpp[[DV]] ~ cbind(tmpp[var.xx]), direction=direction)
+      direction <- ifelse(ROC1$direction=="<","\u02C3","\u02C2")
+      ROC1 <- roc_(tmpp, DV, "predictor", direction=direction) %>% suppressMessages()
       coff <- OptimalCutpoints::optimal.cutpoints(var.xx, DV, tag.healthy = tag.healthy, methods = "Youden", data = tmpp, direction=direction)$Youden$Global$optimal.cutoff$cutoff[1]
     }
-    coff <- sprintf("%.3f", coff); direction <- ifelse(ROC1$direction=="<","≥","≤")
+    coff <- sprintf("%.3f", coff); direction <- ifelse(ROC1$direction=="<","\u2265","\u2264")
     coff <- paste0(direction,coff)
-    pval <- roc.test(ROC0, ROC1)$p.value
+    pval <- roc.test(ROC0, ROC1)[["p.value"]]
     pval <- ifelse(pval<0.001,"<0.001",round(pval,3))
 
     ROC <- ROC1
@@ -67,9 +71,13 @@ auc_combn_listup <- function(DATA, DV, IV, VAR0, COMBN_VAL=1, ALGORITHM="+", EQU
     gname <- paste0(tag.disease," vs. ",tag.healthy, " (ref.)")
     tot.n <- sum(tab)
     tot.event <- tab[2]
-    Ref <- ifelse(var==VAR0,"Ref.","")
-    row <- data.frame(Outcome = gname, Variables = var, Ref=Ref, AUC = auc, Sens = sens, Spec = spec, Cutoff = coff, TP = TP, TN = TN, FP = FP, FN = FN, pval = pval, N = tot.n, Event = tot.event, Percent = prop)
-    if(EQUATION==TRUE){
+    row <- data.frame(Outcome = gname, Variables = var, Ref=Ref, AUC = auc, Sens = sens, Spec = spec, Cutoff = coff, TP = TP, TN = TN, FP = FP, FN = FN, pval = pval)
+    if(DISPLAY.NEVENT==TRUE){
+      row["N"] <- tot.n
+      row["Event"] <- tot.event
+      row["Percent"] <- prop
+    }
+    if(DISPLAY.EQUATION==TRUE){
       row["Equations"] <- getEquations(ff)
     }
     res <- rbind(res, row)
