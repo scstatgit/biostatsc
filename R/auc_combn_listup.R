@@ -71,7 +71,7 @@ auc_combn_listup <- function(DATA, DV, IV, IV.REF, COMBN_VAL=1, ALGORITHM="+", D
     gname <- paste0(tag.disease," vs. ",tag.healthy, " (ref.)")
     tot.n <- sum(tab)
     tot.event <- tab[2]
-    row <- data.frame(Outcome = gname, Variables = var, Ref=Ref, AUC = auc, Sens = sens, Spec = spec, Cutoff = coff, TP = TP, TN = TN, FP = FP, FN = FN, pval = pval)
+    row <- data.frame(Outcome = gname, Variables = var, AUC = auc, Sens = sens, Spec = spec, Cutoff = coff, TP = TP, TN = TN, FP = FP, FN = FN, pval = pval)
     if(DISPLAY.NEVENT==TRUE){
       row["N"] <- tot.n
       row["Event"] <- tot.event
