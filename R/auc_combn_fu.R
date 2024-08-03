@@ -32,7 +32,7 @@ auc_combn_fu <- function(DATA, DV, IV, COMBN_VAL, ALGORITHM = "+"){
       ## original data
       ff <- formula(paste("Y ~", paste0(kk, collapse = ALGORITHM)))
       fit <- glm(ff, data=dd, family = binomial(link="logit")); summary(fit)
-      rocobj <- roc(dd[["Y"]] ~ fitted(fit, type), ci=T)
+      rocobj <- roc(dd[["Y"]] ~ predict(fit, type="response"), ci=T) %>% suppressMessages()
       auc <- rocobj[["ci"]][2]; auc_ci = sprintf("(%.3f - %.3f)", rocobj[["ci"]][1], rocobj[["ci"]][3])
 
       rst <- data.frame(
