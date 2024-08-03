@@ -37,7 +37,7 @@ auc_combn_listup <- function(DATA, DV, IV, IV.REF, COMBN_VAL=1, ALGORITHM="+", D
     tmpp <- subset(tmp, select=c(DV,var.xx)) %>% as.data.frame()
     tmpp <- na.omit(tmpp)
 
-    mf <- as.formula(paste(DV, ".", sep=" ~ "))
+    mf <- as.formula(paste(DV, var, sep=" ~ "))
     ff <- glm(mf, family = binomial, data = tmpp)
     tmpp["predictor"] <- predict(ff, type="respons")
 
