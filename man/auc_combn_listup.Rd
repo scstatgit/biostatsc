@@ -8,10 +8,11 @@ auc_combn_listup(
   DATA,
   DV,
   IV,
-  VAR0,
+  IV.REF,
   COMBN_VAL = 1,
   ALGORITHM = "+",
-  EQUATION = FALSE,
+  DISPLAY.NEVENT = FALSE,
+  DISPLAY.EQUATION = FALSE,
   SEED = 123
 )
 }
@@ -22,17 +23,25 @@ auc_combn_listup(
 
 \item{IV:}{put Independent Variable like this way: c("\emph{IV1}", "\emph{IV2}", ...)}
 
+\item{IV.REF:}{choose one of Reference Independent Varaible from IV}
+
 \item{COMBN_VAL:}{consider how many combinations you want: 1, 2, 3, ...}
 
 \item{ALGORITHM:}{you can choose "+" for multiplicity or "*" for interactions}
+
+\item{DISPLAY.NEVENT:}{If TRUE then print EVENT/N, default is FALSE.}
+
+\item{DISPLAY.EQUATION:}{If TRUE then print equation, default is FALSE.}
+
+\item{SEED:}{set.seed, default is 123. for calculating bootstrap CI.}
 }
 \description{
 This function can list-up AUC from multiple combinations.
 }
 \examples{
-auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),"mpg",1)
-auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),"mpg",2)
-auc_combn_listup(mtcars,c("vs"),c("mpg","cyl","disp","hp","drat"),"mpg",3)
+auc_combn_listup(mtcars,"vs",c("mpg","cyl","disp","hp","drat"),"mpg",1)
+auc_combn_listup(mtcars,"vs",c("mpg","cyl","disp","hp","drat"),"mpg",2)
+auc_combn_listup(mtcars,"vs",c("mpg","cyl","disp","hp","drat"),"mpg",3)
 }
 \keyword{AUC}
 \keyword{Combination}
