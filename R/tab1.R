@@ -19,7 +19,7 @@
 #' tab1(ddd, STRATA = "cyl", OVERALL = TRUE, CATDIGITS = 0)
 #' tab1(ddd, STRATA = "cyl", OVERALL = TRUE, CONDIGITS = 3, CATDIGITS = 0, FUNC = "median", TYPE = 1, MARGIN = 1)
 #' @export
-tab1 <- function(DATA, STRATA = NULL, OVERALL = FALSE, CONDIGITS = 1, CATDIGITS = 1, FUNC = "mean", TYPE = 1, MARGIN = 2){
+tab1 <- function(DATA, STRATA = NULL, OVERALL = FALSE, CONDIGITS = 1, CATDIGITS = 1, PDIGITS = 3, FUNC = "mean", TYPE = 1, MARGIN = 2, SHOWMETHOD=FALSE, SHOWSMD=FALSE){
   mat1 <- describe0(DATA, var.lvs)
   mat2 <- describe1(DATA, CONDIGITS = CONDIGITS, CATDIGITS = CATDIGITS, FUNC = FUNC, TYPE = TYPE)
   if(is.null(STRATA)){
@@ -37,13 +37,21 @@ tab1 <- function(DATA, STRATA = NULL, OVERALL = FALSE, CONDIGITS = 1, CATDIGITS 
     www <- which(res[,1] == STRATA)
     res <- res[-www,]
   }
-  pvals <- do.call(rbind, Map(function(values, name, gvalues, gname) myfun(values, name, DATA[[STRATA]], STRATA), DATA, names(DATA)))
-  res <- left_join(tab1(DATA, STRATA = STRATA) %>% as.data.frame, pvals, by = "Characteristics")
-  res <- res %>%
-    group_by(Characteristics) %>%
-    mutate(pval = ifelse(seq_along(Characteristics)==1,pval,NA),
-           method = ifelse(seq_along(Characteristics)==1,method,NA))
+  if(!is.null(STRATA)){
+    t1 <- as.data.frame(res)
+    pvals <- do.call(rbind, Map(function(values, name, gvalues, gname) mytests(values, name, DATA[[STRATA]], STRATA), DATA, names(DATA)))
+    smds <- do.call(rbind, Map(function(values, name, gvalues, gname) mysmd(values, name, DATA[[STRATA]], STRATA), DATA, names(DATA)))
+    res <- left_join(t1, pvals, by = "Characteristics") %>%
+      left_join(., smds, by = "Characteristics")
+    res <- res %>%
+      group_by(Characteristics) %>%
+      mutate(pval = ifelse(seq_along(Characteristics)==1,pval,NA),
+             method = ifelse(seq_along(Characteristics)==1,method,""),
+             smd = ifelse(seq_along(Characteristics)==1,smd,NA))
+    if(SHOWMETHOD==FALSE){ res <- subset(res, select = -method) }
+    if(SHOWSMD==FALSE){ res <- subset(res, select = -smd) }
+  } else {
+    res <- as.data.frame(res)
+  }
   return(res)
 }
-
-
