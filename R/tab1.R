@@ -37,6 +37,12 @@ tab1 <- function(DATA, STRATA = NULL, OVERALL = FALSE, CONDIGITS = 1, CATDIGITS 
     www <- which(res[,1] == STRATA)
     res <- res[-www,]
   }
+  pvals <- do.call(rbind, Map(function(values, name, gvalues, gname) myfun(values, name, DATA[[STRATA]], STRATA), DATA, names(DATA)))
+  res <- left_join(tab1(DATA, STRATA = STRATA) %>% as.data.frame, pvals, by = "Characteristics")
+  res <- res %>%
+    group_by(Characteristics) %>%
+    mutate(pval = ifelse(seq_along(Characteristics)==1,pval,NA),
+           method = ifelse(seq_along(Characteristics)==1,method,NA))
   return(res)
 }
 
