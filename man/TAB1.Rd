@@ -10,9 +10,12 @@ tab1(
   OVERALL = FALSE,
   CONDIGITS = 1,
   CATDIGITS = 1,
+  PDIGITS = 3,
   FUNC = "mean",
   TYPE = 1,
-  MARGIN = 2
+  MARGIN = 2,
+  SHOWMETHOD = FALSE,
+  SHOWSMD = FALSE
 )
 }
 \arguments{
