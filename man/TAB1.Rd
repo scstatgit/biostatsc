@@ -40,7 +40,6 @@ This function create table1 in biostatistics
 }
 \examples{
 ddd <- mtcars
-ddd <- preprocess(ddd)
 tab1(ddd)
 tab1(ddd, STRATA = "cyl")
 tab1(ddd, STRATA = "cyl", OVERALL = TRUE)
