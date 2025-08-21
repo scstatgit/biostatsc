@@ -1,15 +1,16 @@
 # Descriptive statistics by strata
 #' @export
-describe2 <- function(DATA, STRATA, CONDIGITS = 1, CATDIGITS = 1, FUNC = "mean", TYPE = 1, MARGIN = 2){
+describe2 <- function(DATA, var.num, var.fac, var.lvs, STRATA, CONDIGITS = 1, CATDIGITS = 1, FUNC = "mean", TYPE = 1, MARGIN = 2){
   vals <- c()
-  for(var in names(DATA)){
+  for(var in c(var.num, var.fac)){
     if(var %in% var.num){
       if(FUNC=="mean"){ val <- tapply(DATA[[var]], INDEX = DATA[[STRATA]], function(var) var_msd(var, digits = CONDIGITS, type = TYPE)) }
       if(FUNC=="median"){ val <- tapply(DATA[[var]], INDEX = DATA[[STRATA]], function(var) var_miqr(var, digits = CONDIGITS, type = TYPE)) }
-    }
-    if(var %in% var.fac){
+    } else if(var %in% var.fac){
       vec <- var_nperc(DATA, var, STRATA, type = MARGIN, digits = CATDIGITS)
       val <- matrix(vec, ncol=var.lvs[[STRATA]])
+    } else {
+      next
     }
     vals <- c(vals, val)
   }

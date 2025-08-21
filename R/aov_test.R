@@ -1,5 +1,8 @@
 #' @export
 aov_test <- function(DATA, DV, IV){
+  if (!is.factor(DATA[[IV]])) {
+    DATA[[IV]] <- as.factor(DATA[[IV]])
+  }
   var.equal <- (car::leveneTest(DATA[[DV]], DATA[[IV]], center="median")[[3]][1] <= 0.05)
   mf <- as.formula(paste(DV,IV,sep=" ~ "))
   res <- oneway.test(mf, DATA, var.equal = var.equal)
